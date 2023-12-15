@@ -1,19 +1,24 @@
-  # You may pin to the exact commit or the version.
-  # uses: FridrichDerGosse/pypi-github-sync@118434e4e016d748b9f843b67592c9d48a7889c9
-  uses: FridrichDerGosse/pypi-github-sync@v2.0.0
-  with:
-    # GitHub repo name with format USERNAME/REPO
-    github_repo: 
-    # Your PyPI username (use your GitHub repo secrets)
-    twine_username: 
-    # Your PyPI password (use your GitHub repo secrets)
-    twine_password: 
-    # Repo to upload to with twine, defaults to main PyPI repo
-    upload_repo: # optional
-    # Verify build metadata before publication, defaults to false
-    verify_metadata: # optional
-    # Do not raise an error if version already exists on repo, defaults to false
-    skip_existing: # optional
-    # Verbose output for twine upload, defaults to false
-    verbose: # optional
-          
+name: check_python_version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+
+      - name: Update pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Display Python version
+        run: |
+          python --version
