@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  check-python:
+  python-version-check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Check out repository
       uses: actions/checkout@v2
 
     - name: Set up Python 3.11
@@ -19,9 +19,7 @@ jobs:
         python-version: 3.11
 
     - name: Update pip
-      run: |
-        python -m pip install --upgrade pip
+      run: python -m pip install --upgrade pip
 
-    - name: Display Python Version
-      run: |
-        python --version
+    - name: Display Python version
+      run: python --version
